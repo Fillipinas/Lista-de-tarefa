@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        /* Estilo para itens completos */
+        .completed {
+            text-decoration: line-through;
+            color: rgb(139, 139, 139);
+        }
+        body{
+            background-color: black;
+        }
+        .titulo{
+            color: white;
+        }
+        .todo-list{
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<h1 class="titulo">Lista de Tarefas</h1>
+
+<!-- Formulário para adicionar novas tarefas -->
+<form id="todo-form">
+    <input type="text" id="todo-input" placeholder="Adicionar nova tarefa">
+    <button type="submit">Adicionar</button>
+</form>
+
+<!-- Lista de tarefas -->
+<ul id="todo-list" class="todo-list">
+    <!-- Os itens da lista de tarefas serão adicionados aqui -->
+</ul>
+
+<script>
+    // Função para adicionar nova tarefa
+    function addTodo(event) {
+        event.preventDefault(); // Evita o recarregamento da página
+
+        // Obtém o texto da nova tarefa
+        var todoText = document.getElementById('todo-input').value;
+
+        if (todoText.trim() !== '') { // Verifica se o campo não está vazio
+            // Cria um novo item de lista
+            var todoItem = document.createElement('li');
+            todoItem.innerText = todoText;
+
+            // Adiciona um evento de clique para marcar como completo
+            todoItem.addEventListener('click', function() {
+                this.classList.toggle('completed');
+            });
+
+            // Adiciona o item à lista
+            document.getElementById('todo-list').appendChild(todoItem);
+
+            // Limpa o campo de entrada
+            document.getElementById('todo-input').value = '';
+        }
+    }
+
+    // Adiciona o evento de envio do formulário para adicionar tarefa
+    document.getElementById('todo-form').addEventListener('submit', addTodo);
+</script>
+
+</body>
+</html>
